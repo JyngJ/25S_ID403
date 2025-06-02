@@ -7,7 +7,7 @@
 # Step 1: Put your target video in the ./vid directory
 # Example: ./vid/my_video.mp4
 # 분석할 비디오 파일을 ./vid 폴더에 넣고 아래 경로를 해당 파일명으로 수정하세요.
-video_path = "vid/my_video.mp4"  # Change this to your video file name
+video_path = "./vid/IMG_0582.MOV"  # Change this to your video file name
 
 # -------------------------------
 # Step 2: Set the interval (in seconds) for extracting frames from the video
@@ -17,7 +17,7 @@ interval_seconds = 1  # e.g., 1 = extract one frame per second
 # -------------------------------
 # Step 3: Set the group size and prompt used for each image group
 # 이미지를 몇 장씩 하나의 그룹으로 묶을지, 각 그룹에 보낼 프롬프트를 설정합니다.
-group_size = 5
+group_size = 2 # e.g., 2 = send 2 images per GPT message
 group_prompt = "Describe what you see in each of these images."
 
 # -------------------------------
