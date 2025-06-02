@@ -4,6 +4,30 @@
 # GPT-4o를 활용해 영상에서 프레임을 분석하는 자동화된 메인 스크립트입니다.
 
 # -------------------------------
+# 💡 How to Run (Usage Summary)
+#
+# 1. 터미널에서 가상환경 활성화:
+#    Activate virtual environment in terminal:
+#        source venv/bin/activate
+#
+# 2. 실행:
+#    Run:
+#        python runThis.py
+#
+# 이 스크립트는 다음 과정을 자동으로 수행합니다:
+# This script will automatically perform the following steps:
+#   - ./vid 폴더에 있는 비디오로부터 프레임 추출
+#     Extract frames from the video in the ./vid folder
+#   - GPT-4o에 이미지 + 프롬프트 전송 (그룹 단위)
+#     Send grouped images with a prompt to GPT-4o
+#   - 마지막에 종합 질문을 던지고 결과 출력
+#     Ask a final summarizing question and print the result
+#
+# 설정은 상단의 변수(video_path, interval_seconds 등)를 수정하여 조정할 수 있습니다.
+# You can modify parameters like video_path and interval_seconds at the top of the file.
+# -------------------------------
+
+# -------------------------------
 # Step 1: Put your target video in the ./vid directory
 # Example: ./vid/my_video.mp4
 # 분석할 비디오 파일을 ./vid 폴더에 넣고 아래 경로를 해당 파일명으로 수정하세요.
