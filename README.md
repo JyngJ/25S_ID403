@@ -34,9 +34,9 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 Make sure all Python dependencies are installed. You can install them using:
 
-pip install openai python-dotenv opencv-python tqdm
+> pip install -r requirements.txt
 
-> This will automatically install all required packages listed in requirements.txt:
+This will automatically install all required packages listed in requirements.txt:
 
     •	openai
     •	python-dotenv
