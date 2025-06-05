@@ -1,0 +1,47 @@
+{
+  "video_name": "jaywalk.mov",
+  "interval_seconds": 1,
+  "group_size": 3,
+  "group_prompt": "For each of the images, first count the number of people and vehicles visible in the scene. Then describe what each person and vehicle appears to be doing. Pay particular attention to their movement and behavior (e.g., crossing the road, standing still, approaching traffic, etc.). If anyone is jaywalking, standing dangerously close to traffic, or behaving unusually, highlight those details.",
+  "group_summaries": [
+    {
+      "group_index": 1,
+      "summary": "**Image 1:**\n\n- **People: 3**\n  - One person is standing on the sidewalk near the bottom left corner.\n  - Another person is standing in the road, facing the sidewalk, possibly waiting to cross.\n  - A third person is riding a motorcycle, moving from left to right.\n\n- **Vehicles: 3**\n  - A taxi is parked on the left side of the road.\n  - One motorcycle is moving from left to right.\n  - Another motorcycle is moving from right to left.\n\n**Image 2:**\n\n- **People: 3**\n  - The person on the sidewalk remains in the same position.\n  - The person who was standing in the road is now closer to the taxi, possibly interacting with it.\n  - A person on a motorcycle is moving from right to left.\n\n- **Vehicles: 3**\n  - The taxi is still parked.\n  - A motorcycle is moving from right to left.\n  - Another motorcycle is moving from left to right.\n\n**Image 3:**\n\n- **People: 3**\n  - The person on the sidewalk is still standing in the same spot.\n  - The person near the taxi appears to be interacting with it.\n  - A person on a motorcycle is moving from right to left.\n\n- **Vehicles: 3**\n  - The taxi remains parked.\n  - A motorcycle is moving from right to left.\n  - Another motorcycle is moving from left to right.\n\n**Observations:**\n\n- The person standing in the road in the first image is potentially jaywalking or standing dangerously close to traffic.\n- The interactions near the taxi suggest possible engagement with the vehicle, but no unusual behavior is evident beyond the initial road crossing."
+    },
+    {
+      "group_index": 2,
+      "summary": "**Image 1:**\n\n- **People: 3**\n  - One person is standing on the sidewalk near the bottom left corner.\n  - Another person is standing near the taxi, possibly interacting with it.\n  - A third person is riding a motorcycle, moving from left to right.\n\n- **Vehicles: 3**\n  - A taxi is parked on the left side of the road.\n  - One motorcycle is moving from left to right.\n  - Another motorcycle is moving from right to left.\n\n**Image 2:**\n\n- **People: 2**\n  - The person on the sidewalk remains in the same position.\n  - The person near the taxi is still standing close to it.\n\n- **Vehicles: 2**\n  - The taxi is still parked.\n  - A motorcycle is moving from right to left.\n\n**Image 3:**\n\n- **People: 2**\n  - The person on the sidewalk is still standing in the same spot.\n  - The person near the taxi remains in the same position.\n\n- **Vehicles: 1**\n  - The taxi remains parked.\n\n**Observations:**\n\n- The person standing near the taxi is potentially standing close to traffic but does not appear to be in immediate danger.\n- No unusual behavior is evident beyond the initial road crossing in the first image."
+    },
+    {
+      "group_index": 3,
+      "summary": "**Image 1:**\n\n- **People: 1**\n  - One person is standing on the sidewalk near the bottom left corner.\n\n- **Vehicles: 1**\n  - A taxi is parked on the left side of the road.\n\n**Image 2:**\n\n- **People: 1**\n  - A person is walking on the sidewalk, moving from left to right.\n\n- **Vehicles: 1**\n  - The taxi remains parked.\n\n**Image 3:**\n\n- **People: 1**\n  - The person continues walking on the sidewalk, moving from left to right.\n\n- **Vehicles: 1**\n  - The taxi is still parked.\n\n**Observations:**\n\n- The person is walking on the sidewalk, which is safe and appropriate behavior.\n- No unusual or dangerous behavior is evident in these images."
+    },
+    {
+      "group_index": 4,
+      "summary": "**Image 1:**\n\n- **People: 1**\n  - A person is walking across the road from left to right.\n\n- **Vehicles: 1**\n  - A taxi is parked on the left side of the road.\n\n**Image 2:**\n\n- **People: 1**\n  - The person continues walking across the road from left to right.\n\n- **Vehicles: 1**\n  - The taxi remains parked.\n\n**Image 3:**\n\n- **People: 1**\n  - The person is nearing the other side of the road, continuing to walk from left to right.\n\n- **Vehicles: 1**\n  - The taxi is still parked.\n\n**Observations:**\n\n- The person is crossing the road, which could be considered jaywalking if not at a designated crossing.\n- The person appears to be moving safely without any immediate danger from traffic."
+    },
+    {
+      "group_index": 5,
+      "summary": "**Image 1:**\n\n- **People: 1**\n  - A person is crossing the road from left to right.\n\n- **Vehicles: 2**\n  - A taxi is parked on the left side of the road.\n  - Another car is moving from right to left.\n\n**Image 2:**\n\n- **People: 1**\n  - The person continues to cross the road from left to right.\n\n- **Vehicles: 2**\n  - The taxi remains parked.\n  - The moving car is now closer, continuing from right to left.\n\n**Image 3:**\n\n- **People: 1**\n  - The person is nearing the other side of the road, continuing to walk from left to right.\n\n- **Vehicles: 1**\n  - The taxi is still parked.\n\n**Observations:**\n\n- The person is crossing the road, which may be considered jaywalking if not at a designated crossing.\n- The person appears to be moving safely without immediate danger from traffic."
+    },
+    {
+      "group_index": 6,
+      "summary": "**Image 1:**\n\n- **People: 1**\n  - A person is walking on the sidewalk, moving from left to right.\n\n- **Vehicles: 1**\n  - A taxi is parked on the left side of the road.\n\n**Image 2:**\n\n- **People: 1**\n  - The person continues walking on the sidewalk from left to right.\n\n- **Vehicles: 1**\n  - The taxi remains parked.\n\n**Image 3:**\n\n- **People: 1**\n  - The person is still walking on the sidewalk, moving from left to right.\n\n- **Vehicles: 1**\n  - The taxi is still parked.\n\n**Observations:**\n\n- The person is walking safely on the sidewalk, away from traffic.\n- No unusual or dangerous behavior is evident in these images."
+    },
+    {
+      "group_index": 7,
+      "summary": "**Image 1:**\n\n- **People: 1**\n  - A person is walking on the sidewalk, moving from left to right.\n\n- **Vehicles: 1**\n  - A taxi is parked on the left side of the road.\n\n**Image 2:**\n\n- **People: 1**\n  - The person continues walking on the sidewalk from left to right.\n\n- **Vehicles: 1**\n  - The taxi remains parked.\n\n**Observations:**\n\n- The person is walking safely on the sidewalk, away from traffic.\n- No unusual or dangerous behavior is evident in these images."
+    }
+  ],
+  "final_questions": [
+    "Based on all the images, list any individuals who appear to be engaging in risky or dangerous behaviors, such as jaywalking or standing in the road.",
+    "Are there any consistent behavioral patterns among the pedestrians across the video?",
+    "What do you think this video is generally depicting?"
+  ],
+  "responses": [
+    "Based on the images, one individual appears to be engaging in risky behavior by crossing the road, which could be considered jaywalking if not at a designated crossing. This occurs in the images where the person is moving from left to right across the road. No other risky or dangerous behaviors, such as standing in the road, are evident.",
+    "Across the images, the consistent behavioral pattern among the pedestrians is walking from left to right. One individual crosses the road, potentially jaywalking, while others remain on the sidewalk, moving safely. The primary behavior observed is walking, with no other unusual or dangerous actions evident.",
+    "The video appears to depict a typical street scene in an urban area. It shows pedestrians walking along the sidewalk and crossing the road, as well as vehicles like taxis and motorcycles moving or parked. The focus seems to be on everyday activities, such as commuting or running errands, with some individuals crossing the street, potentially outside of designated crosswalks."
+  ],
+  "execution_time_seconds": 134.04
+}

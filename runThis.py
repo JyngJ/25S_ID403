@@ -24,23 +24,24 @@
 # Step 1: Video Input
 # Set your target video path under ./vid
 # 분석할 비디오 파일 경로를 지정하세요 (예: ./vid/my_video.mp4)
-video_path = "./vid/111.mov"
+video_path = "./vid/jaywalk.mov"
 
 # -------------------------------
 # Step 2: Frame Extraction Interval
 # Set how frequently to extract frames from the video (in seconds)
 # 프레임을 몇 초 간격으로 추출할지 설정합니다
-interval_seconds = 2
+interval_seconds = 1
 
 # -------------------------------
 # Step 3: Image Grouping & Prompt
 # Set how many images to include per prompt, and what prompt to use
 # 이미지 묶음 크기 및 GPT에게 보낼 그룹별 프롬프트 설정
-group_size = 2
+group_size = 3
 group_prompt = (
-    "From all the images you analyzed, count or estimate how many unique cars "
-    "appear in the video. Include any assumptions you make (e.g., whether the same car "
-    "appears in multiple frames), and mention if you saw trucks, motorcycles, or other vehicles too."
+    "For each of the images, first count the number of people and vehicles visible in the scene. "
+    "Then describe what each person and vehicle appears to be doing. "
+    "Pay particular attention to their movement and behavior (e.g., crossing the road, standing still, approaching traffic, etc.). "
+    "If anyone is jaywalking, standing dangerously close to traffic, or behaving unusually, highlight those details."
 )
 
 # -------------------------------
@@ -48,9 +49,9 @@ group_prompt = (
 # After all image groups are analyzed, ask GPT some summary questions
 # GPT 분석 후 던질 종합 질문 리스트
 final_questions = [
-    "Describe what you see in each of these images. In particular, mention any vehicles (cars, buses, motorcycles, etc.) you observe.",
-    "Do you see any patterns or notable features in the vehicles?",
-    "Are there any unusual or interesting aspects of the video that stand out to you?"
+    "Based on all the images, list any individuals who appear to be engaging in risky or dangerous behaviors, such as jaywalking or standing in the road.",
+    "Are there any consistent behavioral patterns among the pedestrians across the video?",
+    "What do you think this video is generally depicting?"
 ]
 
 # -------------------------------
@@ -61,6 +62,7 @@ final_questions = [
 import os
 import json
 import time
+import textwrap
 from extract_frames import extract_frames
 from run_conversation import run_conversation
 from conversation_with_gpt import ask_followup_question
@@ -122,10 +124,17 @@ log_data = {
     "interval_seconds": interval_seconds,
     "group_size": group_size,
     "group_prompt": group_prompt,
+    "group_summaries": [
+        {
+            "group_index": i + 1,
+            "summary": summaries[i]
+        } for i in range(len(summaries))
+    ],
     "final_questions": [q for q, _ in answers],
     "responses": [a for _, a in answers],
     "execution_time_seconds": round(time.time() - start_time, 2)
 }
+
 
 # 🗃 Generate log file name without conflict
 base_log_path = os.path.join("log", f"{trial_name}_log.json")
@@ -139,3 +148,25 @@ with open(log_path, "w") as f:
     json.dump(log_data, f, indent=2, ensure_ascii=False)
 
 print(f"\n✅ Log saved to {log_path}")
+
+# Create human-readable TXT log file
+txt_log_path = log_path.replace(".json", ".txt")
+
+with open(txt_log_path, "w", encoding="utf-8") as f:
+    f.write(f"[📽 Video] {log_data['video_name']}\n")
+    f.write(f"[🕐 Interval] {log_data['interval_seconds']}s\n")
+    f.write(f"[🖼 Group Size] {log_data['group_size']}\n")
+    f.write(f"[📝 Group Prompt]\n{textwrap.fill(log_data['group_prompt'], width=100)}\n\n")
+
+    f.write("[📚 Group Summaries]\n")
+    for group in log_data["group_summaries"]:
+        summary_wrapped = textwrap.fill(group["summary"], width=100)
+        f.write(f"  [Group {group['group_index']}]\n{summary_wrapped}\n\n")
+
+    f.write("[❓ Final Questions & Answers]\n")
+    for q, a in zip(log_data["final_questions"], log_data["responses"]):
+        question_wrapped = textwrap.fill(q, width=100)
+        answer_wrapped = textwrap.fill(a, width=100)
+        f.write(f"  Q: {question_wrapped}\n  A: {answer_wrapped}\n\n")
+
+    f.write(f"[⏱ Execution Time] {log_data['execution_time_seconds']} seconds\n")
