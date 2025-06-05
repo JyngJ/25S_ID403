@@ -1,7 +1,3 @@
-from pathlib import Path
-
-readme_content = """
-
 # 25S_ID403
 
 # Frame2Prompt: Automated Frame Analysis from Video using GPT-4o
