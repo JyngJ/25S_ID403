@@ -24,23 +24,25 @@
 # Step 1: Video Input
 # Set your target video path under ./vid
 # 분석할 비디오 파일 경로를 지정하세요 (예: ./vid/my_video.mp4)
-video_path = "./vid/111.mov"
+video_path = "./vid/village.mov"
 
 # -------------------------------
 # Step 2: Frame Extraction Interval
 # Set how frequently to extract frames from the video (in seconds)
 # 프레임을 몇 초 간격으로 추출할지 설정합니다
-interval_seconds = 2
+interval_seconds = 1
 
 # -------------------------------
 # Step 3: Image Grouping & Prompt
 # Set how many images to include per prompt, and what prompt to use
 # 이미지 묶음 크기 및 GPT에게 보낼 그룹별 프롬프트 설정
-group_size = 2
+group_size = 5
 group_prompt = (
-    "From all the images you analyzed, count or estimate how many unique cars "
-    "appear in the video. Include any assumptions you make (e.g., whether the same car "
-    "appears in multiple frames), and mention if you saw trucks, motorcycles, or other vehicles too."
+    "These are frames extracted from 10 seconds long video, extracted every 2 seconds."
+    # "Humans are segmented with red bounding boxes."
+    "There are three groups of people: 1 person == a single person, 2 people == couple, and more than or equal to  three people == family/friends."
+    " Please analyze the images and count how many there are in each category."
+    "Keep track of the number to give final statics at the end of the conversation."
 )
 
 # -------------------------------
@@ -48,9 +50,7 @@ group_prompt = (
 # After all image groups are analyzed, ask GPT some summary questions
 # GPT 분석 후 던질 종합 질문 리스트
 final_questions = [
-    "Describe what you see in each of these images. In particular, mention any vehicles (cars, buses, motorcycles, etc.) you observe.",
-    "Do you see any patterns or notable features in the vehicles?",
-    "Are there any unusual or interesting aspects of the video that stand out to you?"
+    "What is the total number of single people, couples, and families/friends in the video?",
 ]
 
 # -------------------------------
@@ -95,7 +95,12 @@ if os.path.exists(output_path):
     print("🔁 Skipping frame extraction step.")
 else:
     print("🎞 Extracting frames...")
-    extract_frames(video_path, trial_name, interval_seconds)
+    # Set segementation to True if needed
+    # Set class_id to None to segment all classes
+    # Set class_id to a list of class IDs to segment specific classes
+    # class_id = [0]  # Only segment humans
+    # class_id = [0, 1]  # Segment humans and another class (e.g., cars)
+    extract_frames(video_path, trial_name, interval_seconds, segementation=True, class_id=[0])
 
 # 💬 Step B: Start GPT image conversation
 print("🤖 Starting GPT conversation...")
