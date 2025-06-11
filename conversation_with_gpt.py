@@ -20,14 +20,14 @@ class RequestManager:
     def check_and_wait(self):
         self.request_count += 1
         current_time = time.time()
-        
+
         if self.request_count >= self.requests_before_pause:
             time_since_last_pause = current_time - self.last_pause_time
             if time_since_last_pause < self.pause_duration:
                 wait_time = self.pause_duration - time_since_last_pause
                 print(f"\n💤 Pausing for {int(wait_time)} seconds to manage rate limits... ({self.request_count} requests processed)")
                 time.sleep(wait_time)
-            
+
             self.request_count = 0
             self.last_pause_time = time.time()
             print("▶️ Resuming requests...\n")
@@ -38,10 +38,10 @@ def resize_image(image_path, max_size=800):
         # Calculate new size maintaining aspect ratio
         ratio = min(max_size / max(img.size[0], img.size[1]), 1.0)
         new_size = tuple(int(dim * ratio) for dim in img.size)
-        
+
         if ratio < 1.0:  # Only resize if image is larger than max_size
             img = img.resize(new_size, Image.Resampling.LANCZOS)
-        
+
         # Save to bytes
         buffer = io.BytesIO()
         img.save(buffer, format="JPEG", quality=85, optimize=True)
@@ -52,7 +52,7 @@ def _to_base64(file_path: str) -> str:
     image_data = resize_image(file_path)
     return base64.b64encode(image_data).decode("utf-8")
 
-def start_conversation_with_images(folder_name: str, group_size: int, prompt: str, rate_limiter=None, model: str = "gpt-4o"):
+def start_conversation_with_images(folder_name: str, group_size: int, prompt: str, rate_limiter=None, model: str = "gpt-4.1-mini"):
     """
     Sends grouped images with prompt to GPT and accumulates responses.
     """
@@ -70,7 +70,7 @@ def start_conversation_with_images(folder_name: str, group_size: int, prompt: st
     message_history = []
     summaries = []
     total = len(grouped)
-    
+
     # Initialize request manager
     request_mgr = RequestManager(requests_before_pause=8, pause_duration=60)
 
@@ -117,7 +117,7 @@ def start_conversation_with_images(folder_name: str, group_size: int, prompt: st
     return message_history, summaries
 
 
-def ask_followup_question(message_history, followup_questions, rate_limiter=None, model: str = "gpt-4o"):
+def ask_followup_question(message_history, followup_questions, rate_limiter=None, model: str = "gpt-4.1-mini"):
     """
     Asks one or more follow-up questions based on the existing chat history.
 
@@ -136,7 +136,7 @@ def ask_followup_question(message_history, followup_questions, rate_limiter=None
     for question in followup_questions:
         print(f"💬 Asking follow-up: {question}")
         message_history.append({"role": "user", "content": question})
-        
+
         request_mgr.check_and_wait()
 
         try:
