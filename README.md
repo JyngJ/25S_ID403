@@ -1,27 +1,36 @@
-# 25S_ID403
+# 🛰️ SPATIA: System for Spatial Behavior Analysis using ChatGPT
 
-# Frame2Prompt: Automated Frame Analysis from Video using GPT-4o
+### SPATIA : Spatial Planning Assisted by Tracking and Interpreting Activity
 
-This repository contains a pipeline for extracting image frames from a video at fixed intervals, analyzing each frame using GPT-4o with a predefined prompt, and generating a final summary based on the results.
+This repository contains an experimental pipeline designed to analyze human behavior in physical spaces using video data and GPT-4o.
+It was developed as part of the “Spatia” project, which explores how multimodal large language models (MLLMs) can support spatial design evaluation through human-AI collaboration.
 
 ---
 
 ## 📌 Key Features
 
-1. **Video to Image Frame Extraction**
-   Converts a video into image frames at user-defined time intervals (e.g., every 5 seconds).
-   ➤ If frames already exist with the same interval, extraction is skipped automatically.
+1. **🎞️ Frame Extraction from Video**
+   • Automatically extracts image frames from a video at user-defined time intervals.
+   • Skips extraction if preprocessed frames already exist.
 
-2. **Image + Prompt Analysis via ChatGPT**
-   Sends each extracted frame (in groups) with a textual prompt to GPT-4o, utilizing its multimodal capabilities.
+2. **🤖 Multimodal Analysis with ChatGPT**
+   • Sends grouped image frames with a textual prompt to ChatGPT API for behavior or spatial understanding.
 
-3. **Final Summary or Post-analysis Prompting**
-   After all image groups are analyzed, you can ask one or more follow-up questions.
-   These are answered using the accumulated chat context.
+3. **🧠 Post-analysis with Summary Questions**
+   • After all frame groups are processed, the system asks one or more follow-up questions based on the full image context.
 
-4. **Execution Logging**
-   The results, configuration, and execution time are saved to a log file under the `log/` folder.
-   File names are deduplicated if conflicts exist (e.g., `_log_1.json`).
+4. **🗃️ Structured Logging**
+   • Saves full results, prompts, configuration, and execution time as a .json + .txt log in the log/ folder.
+
+---
+
+🌐 Use Case Example
+
+This pipeline was used in experiments to:
+• Detect risky behaviors (e.g., jaywalking) in urban footage
+• Simulate accessibility evaluations using visual scenes
+• Observe spatial behavior in real-world settings
+• Generate design feedback through visual interpretation
 
 ---
 
