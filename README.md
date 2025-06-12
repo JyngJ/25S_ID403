@@ -1,7 +1,3 @@
-from pathlib import Path
-
-readme_content = """
-
 # 25S_ID403
 
 # Frame2Prompt: Automated Frame Analysis from Video using GPT-4o
@@ -12,19 +8,19 @@ This repository contains a pipeline for extracting image frames from a video at 
 
 ## 📌 Key Features
 
-1. **Video to Image Frame Extraction**  
-   Converts a video into image frames at user-defined time intervals (e.g., every 5 seconds).  
+1. **Video to Image Frame Extraction**
+   Converts a video into image frames at user-defined time intervals (e.g., every 5 seconds).
    ➤ If frames already exist with the same interval, extraction is skipped automatically.
 
-2. **Image + Prompt Analysis via ChatGPT**  
+2. **Image + Prompt Analysis via ChatGPT**
    Sends each extracted frame (in groups) with a textual prompt to GPT-4o, utilizing its multimodal capabilities.
 
-3. **Final Summary or Post-analysis Prompting**  
-   After all image groups are analyzed, you can ask one or more follow-up questions.  
+3. **Final Summary or Post-analysis Prompting**
+   After all image groups are analyzed, you can ask one or more follow-up questions.
    These are answered using the accumulated chat context.
 
-4. **Execution Logging**  
-   The results, configuration, and execution time are saved to a log file under the `log/` folder.  
+4. **Execution Logging**
+   The results, configuration, and execution time are saved to a log file under the `log/` folder.
    File names are deduplicated if conflicts exist (e.g., `_log_1.json`).
 
 ---
@@ -86,6 +82,9 @@ You can configure:
 
 - `video_path`: input video location (e.g., `"./vid/111.mov"`)
 - `interval_seconds`: how frequently to sample frames
+- `set_detection`: whether to perform instance detection on extracted frames
+- `set_segmentation`: whether to perform instance segmentation on extracted frames
+- `class_id` : list of class ids for object detection
 - `group_size`: number of images per GPT request
 - `group_prompt`: the main prompt used for each image group
 - `final_questions`: list of follow-up questions asked after all images are processed
