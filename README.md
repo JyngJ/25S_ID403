@@ -10,27 +10,31 @@ It was developed as part of the “Spatia” project, which explores how multimo
 ## 📌 Key Features
 
 1. **🎞️ Frame Extraction from Video**
-   • Automatically extracts image frames from a video at user-defined time intervals.
-   • Skips extraction if preprocessed frames already exist.
+
+   - Automatically extracts image frames from a video at user-defined time intervals.
+   - Skips extraction if preprocessed frames already exist.
 
 2. **🤖 Multimodal Analysis with ChatGPT**
-   • Sends grouped image frames with a textual prompt to ChatGPT API for behavior or spatial understanding.
+
+   - Sends grouped image frames with a textual prompt to ChatGPT API for behavior or spatial understanding.
 
 3. **🧠 Post-analysis with Summary Questions**
-   • After all frame groups are processed, the system asks one or more follow-up questions based on the full image context.
+
+   - After all frame groups are processed, the system asks one or more follow-up questions based on the full image context.
 
 4. **🗃️ Structured Logging**
-   • Saves full results, prompts, configuration, and execution time as a .json + .txt log in the log/ folder.
+   - Saves full results, prompts, configuration, and execution time as a .json + .txt log in the log/ folder.
 
 ---
 
 🌐 Use Case Example
 
 This pipeline was used in experiments to:
-• Detect risky behaviors (e.g., jaywalking) in urban footage
-• Simulate accessibility evaluations using visual scenes
-• Observe spatial behavior in real-world settings
-• Generate design feedback through visual interpretation
+
+- Detect risky behaviors (e.g., jaywalking) in urban footage
+- Simulate accessibility evaluations using visual scenes
+- Observe spatial behavior in real-world settings
+- Generate design feedback through visual interpretation
 
 ---
 
