@@ -24,7 +24,7 @@
 # Step 1: Video Input
 # Set your target video path under ./vid
 # 분석할 비디오 파일 경로를 지정하세요 (예: ./vid/my_video.mp4)
-video_path = "./vid/village.mov"
+video_path = "./vid/my_video.mp4"
 
 # -------------------------------
 # Step 2: Frame Extraction Interval
@@ -33,24 +33,55 @@ video_path = "./vid/village.mov"
 interval_seconds = 1
 
 # -------------------------------
+# Step 2.5: Optional Frame Extraction Settings
+# If you want to extract frames with detection or segmentation, set these flags
+#  프레임 추출 시 바운딩 박스나 세그멘테이션 마스크를 추가하려면 아래 설정을 변경하세요
+set_detection = True  # Enable bounding box detection
+set_segmentation = True  # Enable segmentation masks
+
+# If you want to segment specific classes, set class_id to a list of class IDs
+# class_id = [0]  # Only segment humans
+# class_id = [0, 1]  # Segment humans and another class (e.g., cars)
+# If you want to segment all classes, set class_id to None
+# 세그멘테이션을 특정 클래스에 대해서만 적용하려면 class_id를 해당 클래스 ID의 리스트로 설정하세요
+class_id = None  # Segment all classes (default)
+
+# -------------------------------
 # Step 3: Image Grouping & Prompt
 # Set how many images to include per prompt, and what prompt to use
 # 이미지 묶음 크기 및 GPT에게 보낼 그룹별 프롬프트 설정
 group_size = 5
+# group_prompt = (
+#     "You will be shown a sequence of images. These images are consecutive frames extracted from a video, maintaining their original temporal order."
+#     "There are three categories of people: 1 person == a single person, 2 people == couple, and more than or equal to three people == family/friends."
+#     "Your task is to observe and categorize groups of people based on their relation using distance, touch, orientation, and synchrony."
+#     "Output the count for each group."
+#     "If a group is already counted in previous frames or groups, do not count them again."
+#     "The green bounding boxes is there to help you identify the humans in the image."
+#     "What is the total count in each group so far?"
+# )
+
+# group_prompt = (
+#     "You will be shown a sequence of images. These images are frames extracted from a video, maintaining their original temporal order."
+#     "Your task is to observe and estimate the age group distribution ratio among them based on visual cues (e.g., body size, posture, clothing)."
+#     # "For your assistance, the background is grayscaled to help you focus on the people."
+#     "Use the following age groups: Child (0–10 years), Teen (11–20 years), 20–30 years, 30–40 years, 40–50 years, 50–60 years, 60+ years)"
+#     "Output the estimated percentage ratio for each group, adding up to approximately 100%."
+#     "Format your output like this: [5%, 15%, 40%, 20%, 10%, 5%, 5%]"
+#     "What is the total number of each category of people so far?"
+# )
+
 group_prompt = (
-    "These are frames extracted from 10 seconds long video, extracted every 2 seconds."
-    # "Humans are segmented with red bounding boxes."
-    "There are three groups of people: 1 person == a single person, 2 people == couple, and more than or equal to  three people == family/friends."
-    " Please analyze the images and count how many there are in each category."
-    "Keep track of the number to give final statics at the end of the conversation."
+    "You will be shown a sequence of images. These images are consecutive frames extracted from a video, maintaining their original temporal order."
+    "Your task is to observe ... "
 )
 
-# -------------------------------
+# -------------------------------x
 # Step 4: Final Follow-Up Questions
 # After all image groups are analyzed, ask GPT some summary questions
 # GPT 분석 후 던질 종합 질문 리스트
 final_questions = [
-    "What is the total number of single people, couples, and families/friends in the video?",
+    "Summarize the your findings."
 ]
 
 # -------------------------------
@@ -85,7 +116,8 @@ rate_limiter = RateLimiter(requests_per_minute=20)  # Adjust as needed
 start_time = time.time()
 
 # 🎯 Define output folder name
-trial_name = os.path.splitext(os.path.basename(video_path))[0] + "_trial"
+data_name = os.path.splitext(os.path.basename(video_path))[0]
+trial_name = data_name + "_trial"
 folder_name = f"{trial_name}_{interval_seconds}s"
 output_path = os.path.join("output", folder_name)
 
@@ -95,12 +127,7 @@ if os.path.exists(output_path):
     print("🔁 Skipping frame extraction step.")
 else:
     print("🎞 Extracting frames...")
-    # Set segementation to True if needed
-    # Set class_id to None to segment all classes
-    # Set class_id to a list of class IDs to segment specific classes
-    # class_id = [0]  # Only segment humans
-    # class_id = [0, 1]  # Segment humans and another class (e.g., cars)
-    extract_frames(video_path, trial_name, interval_seconds, segementation=True, class_id=[0])
+    extract_frames(video_path, data_name, trial_name, interval_seconds, set_detection, set_segmentation, class_id)
 
 # 💬 Step B: Start GPT image conversation
 print("🤖 Starting GPT conversation...")
