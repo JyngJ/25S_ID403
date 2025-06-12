@@ -145,4 +145,4 @@ if __name__ == "__main__":
     parser.add_argument("interval_sec", type=int, help="Interval in seconds between frames")
 
     args = parser.parse_args()
-    extract_frames(args.video_path, args.trial_name, args.interval_sec)
+    extract_frames(args.video_path, args.trial_name, args.interval_sec, detection=False, segmentation=False, class_id=None)
